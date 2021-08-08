@@ -1,6 +1,6 @@
 # creating_an_api
-this is wrtting  an api, which is basically simulating a student crud,   using node express.
-##followings are the description and flow
+this is wrtting  an api, which is basically simulating a student crud,   using node express.<br>
+## followings are the description and flow
 
 - get / => this will return simple text "Welcome to Home page"
 - get /users => this will return a list of all users
