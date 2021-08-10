@@ -4,9 +4,10 @@ const users = require('./user.json');
 
 const app = express();
 
+// middle ware
+app.use(express.json());
 
-
-app.get('//', (request, response) => {
+app.get('/', (request, response) => {
     return response.send('Welcome to Home Page...')
 })
 
@@ -15,37 +16,38 @@ app.get('/users', (request, response) => {
 })
 
 
-app.post('/users/:body', (request, response) => {
+app.post('/users', (request, response) => {
     // parsing is important
-    users.push(JSON.parse(request.params.body));
-    return response.send('added')
+    // users.push(JSON.parse(request.params.body));
+    users.push(request.body);
+    return response.send(`user added with details`)
 })
 
-app.patch('/users/:id/:user', (request, response) => {
-    let user_name = request.params.user;
-    let id = request.params.id;
-
+app.patch('/user', (request, response) => {
+    // let user_name = request.params.user;
+    // let id = request.params.id;
+    let x = request.body;
     for (ele of users) {
-        if (ele.id == id) {
-            ele.first_name = user_name
+        if (ele.id == x.id) {
+            ele.first_name = x.first_name
             break;
         }
     }
-    response.send('updated')
+    response.send(`user details updated `)
 })
 
-app.delete('/users/:id', (request, response) => {
-    let id = request.params.id;
+app.delete('/user', (request, response) => {
+    let id = request.body.id;
 
     for (var i = 0; i < users.length; i++) {
 
         if (users[i].id == id) {
 
-            users.splice(i, 1);
+            users.splice(i, i + 1);
         }
 
     }
-    response.send('deleted')
+    response.send(` user details deleted with id `)
 })
 
 
